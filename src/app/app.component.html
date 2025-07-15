@@ -1,1 +1,10 @@
+<nav class="p-4 flex gap-4 bg-gray-100 border-b">
+  <a
+    routerLink="/"
+    routerLinkActive="font-bold"
+    [routerLinkActiveOptions]="{ exact: true }"
+    >Home</a
+  >
+  <a routerLink="/bookmarks" routerLinkActive="font-bold">Bookmarks</a>
+</nav>
 <router-outlet></router-outlet>
