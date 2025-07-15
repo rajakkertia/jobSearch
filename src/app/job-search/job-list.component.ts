@@ -6,11 +6,11 @@ import { SkeletonCardComponent } from '../shared/components/skeleton/skeleton-ca
 import { finalize } from 'rxjs';
 
 @Component({
-  selector: 'app-job-list',
-  standalone: true,
-  imports: [CommonModule, FormsModule, SkeletonCardComponent],
-  templateUrl: './job-list.component.html',
-  styleUrls: ['./job-list.component.scss']
+    selector: 'app-job-list',
+    standalone: true,
+    imports: [CommonModule, FormsModule, SkeletonCardComponent],
+    templateUrl: './job-list.component.html',
+    styleUrls: ['./job-list.component.scss']
 })
 export class JobListComponent implements OnInit {
 

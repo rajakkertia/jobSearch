@@ -30,7 +30,9 @@
     <app-skeleton-card *ngFor="let i of [1, 2, 3, 4]"></app-skeleton-card>
   </div>
 
-  <div *ngIf="!loading() && jobs().length === 0" class="text-gray-500">No jobs found.</div>
+  <div *ngIf="!loading() && jobs().length === 0" class="text-gray-500">
+    No jobs found.
+  </div>
 
   <div *ngFor="let job of jobs()" class="p-4 border rounded shadow mb-4">
     <h2 class="text-xl font-semibold">{{ job.job_title }}</h2>
