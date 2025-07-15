@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class JobListService {
-  private http = inject(HttpClient);
+  private readonly _http = inject(HttpClient);
 
   private readonly baseUrl = 'https://jsearch.p.rapidapi.com/search';
   private readonly headers = new HttpHeaders({
@@ -23,6 +23,6 @@ export class JobListService {
       .set('page', page.toString())
       .set('num_pages', '1');
 
-    return this.http.get(this.baseUrl, { headers: this.headers, params });
+    return this._http.get(this.baseUrl, { headers: this.headers, params });
   }
 }

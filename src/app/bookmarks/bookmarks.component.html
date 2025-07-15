@@ -1,0 +1,25 @@
+<div class="max-w-4xl mx-auto p-6">
+  <h1 class="text-2xl font-bold mb-4">Bookmarked Jobs</h1>
+
+  @if (bookmarks().length === 0) {
+  <div class="text-gray-500">No bookmarks yet.</div>
+  } @for (job of bookmarks(); track job.job_id) {
+  <div class="p-4 border rounded shadow mb-4">
+    <h2 class="text-xl font-semibold">{{ job.job_title }}</h2>
+    <p class="text-sm text-gray-600">
+      {{ job.employer_name }} – {{ job.job_city }}
+    </p>
+    <p
+      class="mt-2 text-sm text-gray-700"
+      [innerHTML]="job.job_description | slice : 0 : 200"
+    ></p>
+    <a
+      [href]="job.job_apply_link"
+      target="_blank"
+      class="text-blue-600 underline mt-2 inline-block"
+    >
+      Apply
+    </a>
+  </div>
+  }
+</div>
