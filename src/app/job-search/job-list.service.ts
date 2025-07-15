@@ -16,12 +16,12 @@ export class JobListService {
 
   constructor() { }
 
-  searchJobs(query: string, location: string = ''): Observable<any> {
+  searchJobs(query: string, location = '', page = 1): Observable<any> {
     const params = new HttpParams()
       .set('query', query)
-      .set('page', '1')
-      .set('num_pages', '1')
-      .set('location', location);
+      .set('location', location)
+      .set('page', page.toString())
+      .set('num_pages', '1');
 
     return this.http.get(this.baseUrl, { headers: this.headers, params });
   }
