@@ -3,6 +3,8 @@ import { AfterViewInit, Component, ElementRef, inject, OnInit, signal, ViewChild
 import { FormsModule } from '@angular/forms';
 import { JobListService } from './job-list.service';
 import { SkeletonCardComponent } from '../shared/components/skeleton/skeleton-card.component';
+import { Job } from './job.model';
+import { BookmarkService } from '../shared/services/bookmark.service';
 
 @Component({
   selector: 'app-job-list',
@@ -16,7 +18,7 @@ export class JobListComponent implements OnInit, AfterViewInit {
   private readonly jobsService = inject(JobListService);
   page = signal(1);
   hasMore = signal(true);
-  jobs = signal<any[]>([]);
+  jobs = signal<Job[]>([]);
   loading = signal(false);
   loadingMore = signal(false);
   @ViewChild('anchor', { static: true }) anchor!: ElementRef<HTMLElement>;
@@ -39,7 +41,7 @@ export class JobListComponent implements OnInit, AfterViewInit {
 
   selectedLocation = 'Worldwide';
 
-  constructor() { }
+  constructor(private readonly _bookmarkService: BookmarkService) { }
 
   ngOnInit() {
     // Initial job search
@@ -89,5 +91,11 @@ export class JobListComponent implements OnInit, AfterViewInit {
     });
   }
 
+  toggleBookmark(job: Job) {
+    this._bookmarkService.toggle(job);
+  }
+  isBookmarked(job: Job): boolean {
+    return this._bookmarkService.isBookmarked(job);
+  }
 
 }

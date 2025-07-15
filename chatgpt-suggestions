@@ -4,10 +4,10 @@
 
 ; Use location param from JSearch
 
-✅ 2. Pagination (or Infinite Scroll)
-Use page and num_pages params in API
+; ✅ 2. Pagination (or Infinite Scroll)
+; Use page and num_pages params in API
 
-Add pagination UI or “Load More” button
+; Add pagination UI or “Load More” button
 
 ✅ 3. Bookmark Jobs (localStorage)
 Save jobs locally
