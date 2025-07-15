@@ -1,0 +1,28 @@
+<div class="max-w-4xl mx-auto p-6">
+  <h1 class="text-3xl font-bold mb-4">Job Search</h1>
+  <input
+    [(ngModel)]="query"
+    (keyup.enter)="searchJobs()"
+    class="w-full p-3 border rounded mb-6"
+    placeholder="Search for jobs (e.g., Angular Developer)"
+  />
+
+  <div *ngIf="jobs().length === 0" class="text-gray-500">No jobs found.</div>
+
+  <div *ngFor="let job of jobs()" class="p-4 border rounded shadow mb-4">
+    <h2 class="text-xl font-semibold">{{ job.job_title }}</h2>
+    <p class="text-sm text-gray-600">
+      {{ job.employer_name }} – {{ job.job_city }}
+    </p>
+    <p
+      class="mt-2 text-sm text-gray-700"
+      [innerHTML]="job.job_description | slice : 0 : 200"
+    ></p>
+    <a
+      [href]="job.job_apply_link"
+      target="_blank"
+      class="text-blue-600 underline mt-2 inline-block"
+      >Apply</a
+    >
+  </div>
+</div>
