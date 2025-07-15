@@ -1,0 +1,55 @@
+;  Must-Have Features to Impress Recruiters
+; ✅ 1. Search + Location Filter (Country/Remote)
+; Dropdown or input field to filter jobs by country
+
+; Use location param from JSearch
+
+✅ 2. Pagination (or Infinite Scroll)
+Use page and num_pages params in API
+
+Add pagination UI or “Load More” button
+
+✅ 3. Bookmark Jobs (localStorage)
+Save jobs locally
+
+Button like ⭐ Save / ❤️ Favorite
+
+View saved jobs on a separate route
+
+🚀 Impressive Bonus Features
+✅ 4. Job Detail View (Route)
+When a user clicks a job title → navigate to /jobs/:id
+
+Use Job Details endpoint
+
+Display full description, apply button, company info
+
+✅ 5. Responsive Design
+Looks great on mobile, tablet, desktop (Tailwind makes this easy)
+
+✅ 6. Loading Spinner / Skeleton UI
+Use a spinner or animated placeholders while jobs are loading
+
+✅ 7. Error & Empty State Handling
+Show message if API fails or returns no jobs
+
+"No jobs found for Angular in Antarctica" 😂
+
+🏆 Advanced/Bonus Features
+✅ 8. Theme Toggle (Dark/Light Mode)
+Add a Tailwind toggle button
+
+Store theme in localStorage
+
+✅ 9. Debounced Search Input
+Don’t trigger API on every keystroke — debounce input
+
+✅ 10. Export to PDF / Excel (Bookmarks)
+Let users download saved jobs as PDF or Excel
+
+🧭 Suggested Final Structure (Routes)
+Route	Description
+/	Job list
+/bookmarks	Saved jobs
+/jobs/:id	Job details page
+/about	(Optional) About the project
