@@ -27,8 +27,8 @@ Display full description, apply button, company info
 ✅ 5. Responsive Design
 Looks great on mobile, tablet, desktop (Tailwind makes this easy)
 
-✅ 6. Loading Spinner / Skeleton UI
-Use a spinner or animated placeholders while jobs are loading
+; ✅ 6. Loading Spinner / Skeleton UI
+; Use a spinner or animated placeholders while jobs are loading
 
 ✅ 7. Error & Empty State Handling
 Show message if API fails or returns no jobs
