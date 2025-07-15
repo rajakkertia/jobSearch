@@ -6,48 +6,58 @@
       (keyup.enter)="searchJobs()"
       placeholder="Search jobs (e.g., Angular Developer)"
       class="flex-1 p-3 border rounded"
-    />
+      />
 
-    <select
-      [(ngModel)]="selectedLocation"
-      (change)="searchJobs()"
-      class="p-3 border rounded w-full sm:w-64"
-    >
-      <option *ngFor="let location of locations" [value]="location">
-        {{ location }}
-      </option>
-    </select>
+      <select
+        [(ngModel)]="selectedLocation"
+        (change)="searchJobs()"
+        class="p-3 border rounded w-full sm:w-64"
+        >
+        @for (location of locations; track location) {
+          <option [value]="location">
+            {{ location }}
+          </option>
+        }
+      </select>
 
-    <button
-      (click)="searchJobs()"
-      class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-    >
-      Search
-    </button>
-  </div>
+      <button
+        (click)="searchJobs()"
+        class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
+        >
+        Search
+      </button>
+    </div>
 
-  <div *ngIf="loading()" class="space-y-4">
-    <app-skeleton-card *ngFor="let i of [1, 2, 3, 4]"></app-skeleton-card>
-  </div>
+    @if (loading()) {
+      <div class="space-y-4">
+        @for (i of [1, 2, 3, 4]; track i) {
+          <app-skeleton-card></app-skeleton-card>
+        }
+      </div>
+    }
 
-  <div *ngIf="!loading() && jobs().length === 0" class="text-gray-500">
-    No jobs found.
-  </div>
+    @if (!loading() && jobs().length === 0) {
+      <div class="text-gray-500">
+        No jobs found.
+      </div>
+    }
 
-  <div *ngFor="let job of jobs()" class="p-4 border rounded shadow mb-4">
-    <h2 class="text-xl font-semibold">{{ job.job_title }}</h2>
-    <p class="text-sm text-gray-600">
-      {{ job.employer_name }} – {{ job.job_city }}
-    </p>
-    <p
-      class="mt-2 text-sm text-gray-700"
-      [innerHTML]="job.job_description | slice : 0 : 200"
-    ></p>
-    <a
-      [href]="job.job_apply_link"
-      target="_blank"
-      class="text-blue-600 underline mt-2 inline-block"
-      >Apply</a
-    >
-  </div>
-</div>
+    @for (job of jobs(); track job) {
+      <div class="p-4 border rounded shadow mb-4">
+        <h2 class="text-xl font-semibold">{{ job.job_title }}</h2>
+        <p class="text-sm text-gray-600">
+          {{ job.employer_name }} – {{ job.job_city }}
+        </p>
+        <p
+          class="mt-2 text-sm text-gray-700"
+          [innerHTML]="job.job_description | slice : 0 : 200"
+        ></p>
+        <a
+          [href]="job.job_apply_link"
+          target="_blank"
+          class="text-blue-600 underline mt-2 inline-block"
+          >Apply</a
+          >
+        </div>
+      }
+    </div>
