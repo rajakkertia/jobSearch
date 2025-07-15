@@ -18,6 +18,7 @@ export class JobListComponent implements OnInit, AfterViewInit {
   hasMore = signal(true);
   jobs = signal<any[]>([]);
   loading = signal(false);
+  loadingMore = signal(false);
   @ViewChild('anchor', { static: true }) anchor!: ElementRef<HTMLElement>;
   observer!: IntersectionObserver;
 
@@ -56,35 +57,37 @@ export class JobListComponent implements OnInit, AfterViewInit {
       this.observer.observe(this.anchor.nativeElement);
     }
   }
+
+
   searchJobs(append = false) {
-    if (!append) {
+    if (append) {
+      this.loadingMore.set(true);
+    } else {
+      this.loading.set(true);
       this.jobs.set([]);
       this.page.set(1);
       this.hasMore.set(true);
     }
-
-    this.loading.set(true);
 
     const location = this.selectedLocation === 'Worldwide' ? '' : this.selectedLocation;
 
     this.jobsService.searchJobs(this.query, location, this.page()).subscribe({
       next: (res: { data: any }) => {
         const newJobs = res.data || [];
-        if (newJobs.length === 0) {
-          this.hasMore.set(false);
-        }
+        if (newJobs.length === 0) this.hasMore.set(false);
 
         this.jobs.update((existing) => append ? [...existing, ...newJobs] : newJobs);
         this.page.update((p) => p + 1);
-        this.loading.set(false);
       },
       error: (err) => {
         console.error('Error fetching jobs:', err);
+      },
+      complete: () => {
         this.loading.set(false);
+        this.loadingMore.set(false);
       }
     });
   }
-
 
 
 }
