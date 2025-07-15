@@ -54,5 +54,10 @@
     >
   </div>
   }
-  <div #anchor></div>
+  <div #anchor class="flex justify-center items-center py-6">
+    <div
+      *ngIf="loadingMore()"
+      class="w-6 h-6 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"
+    ></div>
+  </div>
 </div>
