@@ -1,0 +1,79 @@
+<div class="sticky top-0 z-10 bg-white border-b shadow-sm p-4 flex flex-wrap gap-4 items-center">
+
+  <!-- Query Input -->
+  <input
+    type="text"
+    [(ngModel)]="query"
+    (ngModelChange)="emitFilters()"
+    placeholder="Search jobs (e.g., Angular Developer)"
+    class="p-2 border rounded w-64"
+  />
+
+  <!-- Location Filter -->
+  <select
+    [(ngModel)]="location"
+    (ngModelChange)="emitFilters()"
+    class="p-2 border rounded w-48"
+  >
+    @for (loc of locations; track loc) {
+      <option [value]="loc">{{ loc }}</option>
+    }
+  </select>
+
+  <!-- Company Filter -->
+  <select
+    [(ngModel)]="company"
+    (ngModelChange)="emitFilters()"
+    class="p-2 border rounded w-40"
+  >
+    @for (company of companies; track company) {
+      <option [value]="company">{{ company }}</option>
+    }
+  </select>
+
+  <!-- Remote Only -->
+  <label class="flex items-center gap-1 text-sm">
+    <input
+      type="checkbox"
+      [(ngModel)]="isRemote"
+      (ngModelChange)="emitFilters()"
+      class="accent-blue-600"
+    />
+    Remote Only
+  </label>
+
+  <!-- Job Type -->
+  <select
+    [(ngModel)]="jobType"
+    (ngModelChange)="emitFilters()"
+    class="p-2 border rounded w-36"
+  >
+    <option value="All">All Types</option>
+    <option value="Full-time">Full-time</option>
+    <option value="Part-time">Part-time</option>
+    <option value="Contract">Contract</option>
+    <option value="Internship">Internship</option>
+  </select>
+
+  <!-- Posted Date -->
+  <select
+    [(ngModel)]="postedWithinDays"
+    (ngModelChange)="emitFilters()"
+    class="p-2 border rounded w-40"
+  >
+    <option value="Any">Any Time</option>
+    <option value="1">Last 24 Hours</option>
+    <option value="3">Last 3 Days</option>
+    <option value="7">Last 7 Days</option>
+    <option value="30">Last 30 Days</option>
+  </select>
+
+  <!-- Reset Button -->
+  <button
+    (click)="resetFilters()"
+    class="ml-auto px-3 py-2 bg-gray-200 hover:bg-gray-300 rounded text-sm"
+  >
+    Reset
+  </button>
+
+</div>

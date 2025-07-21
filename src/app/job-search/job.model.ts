@@ -8,4 +8,6 @@ export interface Job {
   job_country?: string;
   job_posted_at_datetime_utc?: string;
   employer_logo?: string;
+  job_is_remote?: boolean;
+  job_employment_type?: string;
 }

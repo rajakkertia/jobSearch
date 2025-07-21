@@ -1,6 +1,12 @@
 <div class="max-w-4xl mx-auto p-6">
+  <app-job-filter
+    [companies]="uniqueCompanies"
+    (filtersChanged)="onFiltersChanged($event)"
+  ></app-job-filter>
+
   <h1 class="text-3xl font-bold mb-4">Job Search</h1>
-  <div class="flex flex-col sm:flex-row gap-4 mb-4">
+
+  <!-- <div class="flex flex-col sm:flex-row gap-4 mb-4">
     <input
       [(ngModel)]="query"
       (keyup.enter)="searchJobs()"
@@ -14,9 +20,7 @@
       class="p-3 border rounded w-full sm:w-64"
     >
       @for (location of locations; track location) {
-      <option [value]="location">
-        {{ location }}
-      </option>
+        <option [value]="location">{{ location }}</option>
       }
     </select>
 
@@ -26,72 +30,20 @@
     >
       Search
     </button>
-  </div>
+  </div> -->
 
   @if (loading()) {
-  <div class="space-y-4">
-    @for (i of [1, 2, 3, 4]; track i) {
-    <app-skeleton-card></app-skeleton-card>
-    }
-  </div>
+    <div class="space-y-4">
+      @for (i of [1, 2, 3, 4]; track i) {
+        <app-skeleton-card></app-skeleton-card>
+      }
+    </div>
   } @if (!loading() && jobs().length === 0) {
-  <div class="text-gray-500">No jobs found.</div>
+    <div class="text-gray-500">No jobs found.</div>
   } @for (job of jobs(); track job) {
-  <div class="relative p-4 border rounded shadow mb-4">
-    <!-- Bookmark Icon in Top-Right -->
-    <button
-      (click)="toggleBookmark(job)"
-      class="absolute top-4 right-4"
-      [class.text-yellow-500]="isBookmarked(job)"
-      [attr.aria-label]="isBookmarked(job) ? 'Remove bookmark' : 'Add bookmark'"
-    >
-      <svg
-        *ngIf="isBookmarked(job)"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="currentColor"
-        class="w-6 h-6 text-yellow-500"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
-        />
-      </svg>
-
-      <svg
-        *ngIf="!isBookmarked(job)"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        class="w-6 h-6 text-gray-400"
-        stroke="currentColor"
-        viewBox="0 0 24 24"
-      >
-        <path
-          d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0 1 11.186 0Z"
-        />
-      </svg>
-    </button>
-
-    <h2 class="text-xl font-semibold pr-8">{{ job.job_title }}</h2>
-
-    <p class="text-sm text-gray-600">
-      {{ job.employer_name }} – {{ job.job_city }}
-    </p>
-
-    <p
-      class="mt-2 text-sm text-gray-700"
-      [innerHTML]="job.job_description | slice : 0 : 200"
-    ></p>
-
-    <a
-      [href]="job.job_apply_link"
-      target="_blank"
-      class="text-blue-600 underline mt-2 inline-block"
-    >
-      Apply
-    </a>
-  </div>
-
+    <app-job-card [job]="job"></app-job-card>
   }
+
   <div #anchor class="flex justify-center items-center py-6">
     <div
       *ngIf="loadingMore()"
